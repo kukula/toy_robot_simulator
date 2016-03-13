@@ -2,8 +2,7 @@ module ToyRobotSimulator
   class Bot
     TABLETOP_WIDTH = 5
     TABLETOP_HEIGHT = 5
-    DIRECTIONS = %i(north south east west)
-    MOVEMENTS = {
+    DIRECTIONS = {
       north: [0, 1],
       south: [0, -1],
       east:  [-1, 0],
@@ -45,11 +44,11 @@ module ToyRobotSimulator
     end
 
     def direction_valid?(new_direction = direction)
-      DIRECTIONS.include? new_direction
+      DIRECTIONS.keys.include? new_direction
     end
 
     def movement
-      MOVEMENTS[direction]
+      DIRECTIONS[direction]
     end
   end
 end
