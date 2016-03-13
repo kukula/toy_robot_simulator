@@ -2,14 +2,14 @@ module ToyRobotSimulator
   class Controller
     DIRECTIONS = %w(NORTH SOUTH EAST WEST)
 
-    attr_reader :bot, :command, :arguments
+    attr_reader :bot
 
-    def initialize(bot, initial_command)
+    def initialize(bot)
       @bot = bot
-      @command, @arguments = initial_command.split
     end
 
-    def perform
+    def perform(user_command)
+      command, arguments = user_command.split
       case command
       when *DIRECTIONS
         bot.direction = command.downcase.to_sym
@@ -19,7 +19,7 @@ module ToyRobotSimulator
       when "REPORT"
         bot.inspect.upcase
       when "PLACE"
-        place
+        place(command, arguments)
       else
         false
       end
@@ -27,10 +27,10 @@ module ToyRobotSimulator
 
     private
 
-    def place
+    def place(command, arguments)
       return false if arguments.nil?
       args = arguments.split(",")
-      return false unless args.count == 3
+      return false if args.count < 3
       bot.place args[0].to_i, args[1].to_i, args[2].downcase.to_sym
     end
   end
