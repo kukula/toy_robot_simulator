@@ -12,6 +12,7 @@ describe ToyRobotSimulator::Controller do
 
     it "inspects bot when command 'REPORT'" do
       expect(bot).to receive(:inspect).and_return('0,0,north')
+      expect($stdout).to receive(:puts).with('0,0,NORTH')
       expect(controller.perform("REPORT")).to be_truthy
     end
 
