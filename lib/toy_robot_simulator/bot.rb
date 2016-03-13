@@ -11,11 +11,8 @@ module ToyRobotSimulator
 
     attr_reader :x, :y, :direction
 
-    def initialize(x, y, direction)
+    def place(x, y, direction)
       @x, @y, @direction = x, y, direction
-    end
-
-    def valid?
       coordinates_valid? && direction_valid?
     end
 
