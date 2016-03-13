@@ -22,21 +22,19 @@ describe ToyRobotSimulator::Bot do
     end
   end
 
-  describe "#direction=" do
-    it "changes direction if new direction is valid" do
+  describe "#turn" do
+    it "changes direction when bot turns right" do
       bot.place(0, 0, :north)
 
-      expect {
-        bot.direction = :west
-      }.to change { bot.direction }.from(:north).to(:west)
+      expect { bot.turn(:right) }.to change { bot.direction }
+        .from(:north).to(:east)
     end
-    
-    it "doesn't change direction if new direction isn't valid" do
+
+    it "changes direction when bot turns left" do
       bot.place(0, 0, :north)
 
-      expect {
-        bot.direction = :north_east
-      }.not_to change { bot.direction }
+      expect { bot.turn(:left) }.to change { bot.direction }
+        .from(:north).to(:west)
     end
   end
 
@@ -56,17 +54,17 @@ describe ToyRobotSimulator::Bot do
     end
 
     it "moves robot one unit east" do
-      bot.place(3, 0, :east)
+      bot.place(0, 0, :east)
 
       expect { bot.move}.to change { bot.inspect }.
-        from("3,0,east").to("2,0,east")
+        from("0,0,east").to("1,0,east")
     end
 
     it "moves robot one unit north" do
-      bot.place(0, 0, :west)
+      bot.place(3, 0, :west)
 
       expect { bot.move}.to change { bot.inspect }.
-        from("0,0,west").to("1,0,west")
+        from("3,0,west").to("2,0,west")
     end
 
     it "doesn't move robot when it's on edge" do

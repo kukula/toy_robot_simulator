@@ -5,8 +5,12 @@ module ToyRobotSimulator
     DIRECTIONS = {
       north: [0, 1],
       south: [0, -1],
-      east:  [-1, 0],
-      west:  [1, 0]
+      east:  [1, 0],
+      west:  [-1, 0]
+    }
+    TURNS = {
+      right: { north: :east, west: :north, south: :west, east: :south },
+      left:  { north: :west, west: :south, south: :east, east: :north }
     }
 
     attr_reader :x, :y, :direction
@@ -16,10 +20,8 @@ module ToyRobotSimulator
       coordinates_valid? && direction_valid?
     end
 
-    def direction=(new_direction)
-      if direction_valid? new_direction
-        @direction = new_direction
-      end
+    def turn(orientation)
+      @direction = TURNS[orientation][direction]
     end
 
     def move

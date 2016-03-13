@@ -15,10 +15,12 @@ describe ToyRobotSimulator::Controller do
       expect(controller.perform("REPORT")).to be_truthy
     end
 
-    ToyRobotSimulator::Controller::DIRECTIONS.each do |direction|
-      it "changes bot direction when command '#{direction}'" do
-        expect(bot).to receive(:direction=).with(direction.downcase.to_sym)
-        expect(controller.perform(direction)).to be_truthy
+    ToyRobotSimulator::Controller::TURNS.each do |turn|
+      it "changes bot direction when command '#{turn}'" do
+        expect(bot).to receive(:turn)
+          .with(turn.downcase.to_sym)
+          .and_return(true)
+        expect(controller.perform(turn)).to be_truthy
       end
     end
 

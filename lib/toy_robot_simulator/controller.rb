@@ -1,6 +1,6 @@
 module ToyRobotSimulator
   class Controller
-    DIRECTIONS = %w(NORTH SOUTH EAST WEST)
+    TURNS = %w(RIGHT LEFT)
 
     attr_reader :bot
 
@@ -11,13 +11,14 @@ module ToyRobotSimulator
     def perform(user_command)
       command, arguments = user_command.split
       case command
-      when *DIRECTIONS
-        bot.direction = command.downcase.to_sym
+      when *TURNS
+        bot.turn command.downcase.to_sym
       when "MOVE"
         bot.move
         true
       when "REPORT"
-        bot.inspect.upcase
+        puts bot.inspect.upcase
+        true
       when "PLACE"
         place(command, arguments)
       else
