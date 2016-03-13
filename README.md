@@ -1,41 +1,28 @@
 # ToyRobotSimulator
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/toy_robot_simulator`. To experiment with that code, run `bin/console` for an interactive prompt.
-
-TODO: Delete this and the text above, and describe your gem
-
-## Installation
-
-Add this line to your application's Gemfile:
-
-```ruby
-gem 'toy_robot_simulator'
-```
-
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
-
-    $ gem install toy_robot_simulator
-
 ## Usage
 
-TODO: Write usage instructions here
+Run `bin/run` with filename to get robot simulation output.
+Will output instructions when run without filename
 
-## Development
+```bash
+$ bin/run spec/examples/example_0
+0,1,NORTH
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+$ bin/run spec/examples/example_2
+3,3,NORTH
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+$ bin/run spec/examples/example_1
+0,0,WEST
 
-## Contributing
+$ bin/run
+Please provide file with commands.
+Use robot commands listed below. Note that robot needs to be placed before performing commands.
 
-Bug reports and pull requests are welcome on GitHub at https://github.com/[USERNAME]/toy_robot_simulator.
-
-
-## License
-
-The gem is available as open source under the terms of the [MIT License](http://opensource.org/licenses/MIT).
-
+. PLACE will put the toy robot on the table in position X,Y and facing NORTH, SOUTH, EAST or WEST.
+. The origin (0,0) can be considered to be the SOUTH WEST most corner.
+. The first valid command to the robot is a PLACE command, after that, any sequence of commands may be issued, in any order, including another PLACE command. The application should discard all commands in the sequence until a valid PLACE command has been executed.
+. MOVE will move the toy robot one unit forward in the direction it is currently facing.
+. LEFT and RIGHT will rotate the robot 90 degrees in the specified direction without changing the position of the robot.
+. REPORT will announce the X,Y and orientation of the robot.
+```
