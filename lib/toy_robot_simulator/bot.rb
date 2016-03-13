@@ -14,6 +14,12 @@ module ToyRobotSimulator
       coordinates_valid? && direction_valid?
     end
 
+    def direction=(new_direction)
+      if direction_valid? new_direction
+        @direction = new_direction
+      end
+    end
+
     def inspect
       [x, y, direction].map(&:to_s).join(",")
     end

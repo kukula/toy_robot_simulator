@@ -23,4 +23,20 @@ describe ToyRobotSimulator::Bot do
       expect(bot).not_to be_valid
     end
   end
+
+  describe "#direction=" do
+    it "changes direction if new direction is valid" do
+      bot = ToyRobotSimulator::Bot.new(0, 0, "NORTH")
+      expect {
+        bot.direction = "WEST"
+      }.to change { bot.direction }.from("NORTH").to("WEST")
+    end
+    
+    it "doesn't change direction if new direction isn't valid" do
+      bot = ToyRobotSimulator::Bot.new(0, 0, "NORTH")
+      expect {
+        bot.direction = "NORTH-EAST"
+      }.not_to change { bot.direction }
+    end
+  end
 end
